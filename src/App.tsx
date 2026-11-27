@@ -152,8 +152,27 @@ export default function App() {
     try {
       if (!supabase) return;
       setBusy(true);
-      const { data, error: e2 } = await supabase.functions.invoke('create-customer', { body: newCustomer });
-      if (e2) throw e2; if (data?.error) throw new Error(data.error);
+      // Refresh the administrator JWT immediately before the privileged Edge Function call.
+      const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession();
+      if (refreshError || !refreshed.session) {
+        throw new Error('Your administrator session has expired. Sign out and sign in again, then retry.');
+      }
+      const { data, error: invokeError } = await supabase.functions.invoke('create-customer', {
+        body: newCustomer,
+        headers: { Authorization: `Bearer ${refreshed.session.access_token}` },
+      });
+      if (invokeError) {
+        let detail = invokeError.message || 'Customer creation failed.';
+        const context = (invokeError as any).context;
+        if (context && typeof context.json === 'function') {
+          try {
+            const payload = await context.json();
+            if (payload?.error) detail = payload.error;
+          } catch { /* retain the SDK error message */ }
+        }
+        throw new Error(detail);
+      }
+      if (data?.error) throw new Error(data.error);
       setCreatedCredentials({ email: data.customer.email, password: data.temporary_password });
       setNewCustomer({ display_name: '', email: '' }); await loadAdminData(); flash('Customer account created. Save the temporary password now.');
     } catch (err:any) { setError(err.message); }
