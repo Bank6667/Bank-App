@@ -1,4 +1,12 @@
-      let existing: Conversation | undefined = conversations.find(c => c.customer_id === profile.id && ['open','pending'].includes(c.status));
+import { useCallback, useEffect, useMemo, useState, type FormEvent } from 'react';
+import {
+  Activity, ArrowDownLeft, ArrowLeftRight, ArrowUpRight, Bell, Check,
+  ChevronDown, CircleHelp, LayoutDashboard, LogOut, Menu, MessageCircle,
+  Plus, RefreshCw, Send, Settings, ShieldCheck, Users, Wallet, X
+} from 'lucide-react';
+import { isSupabaseConfigured, supabase, simulatorAction } from './lib/supabase';
+
+let existing: Conversation | undefined = conversations.find(c => c.customer_id === profile.id && ['open','pending'].includes(c.status));
       if (!existing) { const {data,error:e}=await supabase.from('support_conversations').insert({customer_id:profile.id,status:'open'}).select().single(); if(e)throw e; existing=data as Conversation; }
       if (!existing) throw new Error('Unable to open a support conversation. Please try again.');
       setActiveConversation(existing.id); await loadMessages(existing.id); setTab('support');
@@ -185,7 +193,31 @@ export default function App() {
       let existing = conversations.find(c => c.customer_id === profile.id && ['open','pending'].includes(c.status));
       if (!existing) { const {data,error:e}=await supabase.from('support_conversations').insert({customer_id:profile.id,status:'open'}).select().single(); if(e)throw e; existing=data; }
       setActiveConversation(existing.id); await loadMessages(existing.id); setTab('support');
-    } catch(err:any){setError(err.message);}
+    } catch(err:any){setError(err.message);}const startChat = async () => {
+  if (!supabase || !profile) return;
+  try {
+    let existing: Conversation | undefined = conversations.find(
+      c => c.customer_id === profile.id && ['open', 'pending'].includes(c.status)
+    );
+
+    if (!existing) {
+      const { data, error: e } = await supabase
+        .from('support_conversations')
+        .insert({ customer_id: profile.id, status: 'open' })
+        .select()
+        .single();
+
+      if (e) throw e;
+      existing = data as Conversation;
+    }
+
+    if (!existing) throw new Error('Unable to open support conversation.');
+    setActiveConversation(existing.id);
+    await loadMessages(existing.id);
+    setTab('support');
+  } catch (err: any) {
+    setError(err.message);
+  }
   };
   const sendMessage = async (e:FormEvent) => {
     e.preventDefault(); if(!supabase || !profile || !activeConversation || !chatText.trim())return;
