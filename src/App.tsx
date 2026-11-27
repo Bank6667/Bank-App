@@ -49,6 +49,7 @@ export default function App() {
   const [chatText, setChatText] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const entryRole = window.location.pathname.startsWith('/admin') ? 'admin' : window.location.pathname.startsWith('/user') ? 'customer' : null;
 
   const flash = (message: string) => { setToast(message); window.setTimeout(() => setToast(''), 3500); };
   const loadSettings = useCallback(async () => {
@@ -109,6 +110,7 @@ export default function App() {
       if (user) {
         const { data: p, error: e } = await supabase!.from('profiles').select('*').eq('id', user.id).maybeSingle();
         if (e) setError(e.message);
+        else if (p && entryRole && p.role !== entryRole) { await supabase!.auth.signOut(); setSessionUser(null); setError(`This link is for ${entryRole === 'admin' ? 'administrators' : 'customers'} only. Sign in with the correct account.`); }
         else if (p) { setProfile(p as Profile); await refresh(p as Profile); if (!p.welcome_seen_at && p.role === 'customer') setShowWelcome(true); }
       }
       setBooting(false);
@@ -137,6 +139,7 @@ export default function App() {
       if (e2) throw e2;
       const { data: p, error: pErr } = await supabase.from('profiles').select('*').eq('id', data.user.id).single();
       if (pErr) throw pErr;
+      if (entryRole && p.role !== entryRole) { await supabase.auth.signOut(); throw new Error(`This link is for ${entryRole === 'admin' ? 'administrators' : 'customers'} only. Sign in with the correct account.`); }
       setProfile(p as Profile); await refresh(p as Profile); setTab('overview');
       if (!p.welcome_seen_at && p.role === 'customer') setShowWelcome(true);
     } catch (err:any) { setError(err.message || 'Unable to sign in'); }
