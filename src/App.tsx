@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import type { FormEvent } from 'react';
-import { Activity, ArrowDownLeft, ArrowLeftRight, ArrowUpRight, Bell, Check, ChevronDown, CircleHelp, CreditCard, LayoutDashboard, LogOut, Menu, MessageCircle, Plus, RefreshCw, Send, Settings, ShieldCheck, Users, Wallet, X } from 'lucide-react';
-import { isSupabaseConfigured, simulatorAction, supabase } from './lib/supabase';
+      let existing: Conversation | undefined = conversations.find(c => c.customer_id === profile.id && ['open','pending'].includes(c.status));
+      if (!existing) { const {data,error:e}=await supabase.from('support_conversations').insert({customer_id:profile.id,status:'open'}).select().single(); if(e)throw e; existing=data as Conversation; }
+      if (!existing) throw new Error('Unable to open a support conversation. Please try again.');
+      setActiveConversation(existing.id); await loadMessages(existing.id); setTab('support');
 
 type Profile = { id: string; role: 'admin' | 'customer'; display_name: string; email: string | null; demo_pin_set_at?: string | null; welcome_seen_at?: string | null };
 type Account = { id: string; user_id: string; display_account_name: string; bank_display_name: string; currency_code: string; simulated_balance: number; account_suffix: string };
