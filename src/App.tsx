@@ -133,6 +133,8 @@ export default function App() {
     if (!profile || !supabase) return;
     const channel = supabase.channel('simulator-live-'+profile.id)
       .on('postgres_changes',{event:'*',schema:'public',table:'notifications',filter:'user_id=eq.'+profile.id},()=>loadCustomerData(profile.id))
+      .on('postgres_changes',{event:'*',schema:'public',table:'demo_accounts',filter:'user_id=eq.'+profile.id},()=>profile.role==='customer' && loadCustomerData(profile.id))
+      .on('postgres_changes',{event:'*',schema:'public',table:'profiles',filter:'id=eq.'+profile.id},async()=>{if(profile.role==='customer'){const {data}=await supabase!.from('profiles').select('*').eq('id',profile.id).maybeSingle();if(data)setProfile(await addAvatarDisplayUrl(data as Profile));}})
       .on('postgres_changes',{event:'*',schema:'public',table:'demo_transactions'},()=>profile.role==='customer' ? loadCustomerData(profile.id) : loadAdminData())
       .on('postgres_changes',{event:'*',schema:'public',table:'support_messages'},()=>activeConversation && loadMessages(activeConversation))
       .subscribe();
