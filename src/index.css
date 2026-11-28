@@ -363,3 +363,26 @@
  .hero-actions button{font-size:8px}
  .customer-tx-description b{max-width:125px}
 }
+
+
+/* Admin-controlled bank identity and customer profile placement */
+.customer-welcome-identity{display:flex;align-items:center;gap:13px;min-width:0}
+.customer-profile-photo{width:54px;height:54px;flex:none;object-fit:cover;border-radius:50%;border:2px solid #fff;box-shadow:0 4px 14px #152f401a}
+.customer-profile-fallback{display:grid;place-items:center;background:#e8edf0;color:#294657;font:700 20px Manrope,sans-serif}
+.profile-avatar-image{width:38px;height:38px;flex:none;object-fit:cover;border-radius:50%;border:1px solid #ffffff35}
+.profile-avatar-image.small{width:32px;height:32px}
+.brand-color-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.brand-color-controls label{display:grid;gap:7px}
+.brand-color-controls input[type=color]{width:100%;height:44px;padding:4px;border:1px solid #dfe5e8;border-radius:7px;background:#fff;cursor:pointer}
+.brand-color-controls small{font-size:10px;color:#83919a;line-height:1.45}
+.customer-hero{background:linear-gradient(112deg,var(--brand-primary,#163b55) 0%,color-mix(in srgb,var(--brand-primary,#163b55) 66%,var(--brand-secondary,#287078)) 58%,var(--brand-secondary,#287078) 100%)}
+.primary,.customer-auth .primary{background:var(--brand-primary,#163b55)!important;border-color:var(--brand-primary,#163b55)!important}
+.customer-app .nav-item.active,.admin-app .nav-item.active{background:color-mix(in srgb,var(--brand-primary,#163b55) 14%,transparent)}
+.customer-app .quick-icon{background:color-mix(in srgb,var(--brand-secondary,#287078) 11%,white);color:var(--brand-primary,#163b55)}
+.customer-app .hero-actions button:first-child{background:var(--brand-secondary,#287078);border-color:var(--brand-secondary,#287078);color:#fff}
+.customer-auth .auth-art{background:linear-gradient(135deg,var(--brand-primary,#163b55),var(--brand-secondary,#287078))}
+@media(max-width:599px){
+ .customer-welcome-identity{gap:10px}
+ .customer-profile-photo{width:46px;height:46px}
+ .brand-color-controls{grid-template-columns:1fr}
+}
