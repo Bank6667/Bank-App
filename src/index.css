@@ -107,3 +107,16 @@
 .auth-mobile-signboard{display:none;align-items:flex-start;gap:8px;margin-top:18px;padding:12px;border:1px solid #e6ddca;border-radius:7px;background:#faf8f2;color:#756344;font-size:9px;line-height:1.55}
 .auth-mobile-signboard svg{flex:none}
 @media(max-width:760px){.auth-mobile-signboard{display:flex}}
+
+.customer-auth .auth-art{background:linear-gradient(145deg,#10283c,#1a4054);padding:54px}
+.customer-auth .auth-art-inner{max-width:470px}
+.customer-auth .auth-art .brand{margin-bottom:100px}
+.customer-auth .auth-art h1{font-size:46px;line-height:1.08;letter-spacing:-1.8px;max-width:420px}
+.customer-auth .auth-art-inner>p{font-size:13px;line-height:1.8;color:#c1cdd6}
+.customer-auth .auth-main{background:#fff}
+.customer-auth .login-card h2{font-size:27px;letter-spacing:-.7px}
+.customer-auth .login-card label{font-size:11px}
+.customer-auth .login-card input{height:46px;border-radius:7px;font-size:12px}
+.customer-auth .primary{background:#163b55;border-color:#163b55;border-radius:7px;min-height:44px;font-size:11px;letter-spacing:.2px}
+.customer-auth .login-help{margin-top:19px!important}
+@media(max-width:760px){.customer-auth .auth-art{display:none}}
