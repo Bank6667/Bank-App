@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState, type FormEvent, type CSSProp
 import {
   Activity, ArrowDownLeft, ArrowLeftRight, ArrowUpRight, Bell, Check,
   ChevronDown, CircleHelp, LayoutDashboard, LogOut, Menu, MessageCircle,
-  Plus, RefreshCw, Send, Settings, ShieldCheck, Users, Wallet, X
+  Paperclip, Plus, RefreshCw, Send, Settings, ShieldCheck, Trash2, Users, Wallet, X
 } from 'lucide-react';
 import { isSupabaseConfigured, supabase, simulatorAction } from './lib/supabase';
 
@@ -54,6 +54,7 @@ export default function App() {
   const [adjust, setAdjust] = useState({ customer_id: '', amount: '', direction: 'in', description: 'Admin balance adjustment' });
   const [transfer, setTransfer] = useState({ recipient_name: '', recipient_bank: '', recipient_account: '', amount: '', description: '', pin: '' });
   const [showTransferConfirm, setShowTransferConfirm] = useState(false);
+  const [showPinPrompt, setShowPinPrompt] = useState(false);
   const [pin, setPin] = useState('');
   const [pinConfirm, setPinConfirm] = useState('');
   const [chatText, setChatText] = useState('');
@@ -319,27 +320,27 @@ export default function App() {
   };
   const makeTransfer = async (e: FormEvent) => {
     e.preventDefault(); setError('');
-    if (!transfer.recipient_name.trim() || !transfer.recipient_bank.trim() || !/^\d{8,20}$/.test(transfer.recipient_account.replace(/\s/g,''))) {
-      setError('Enter the recipient name, bank and a valid account number.'); return;
-    }
-    if (!Number.isFinite(Number(transfer.amount)) || Number(transfer.amount) <= 0 || !transfer.description.trim()) {
-      setError('Enter a valid amount and transfer description.'); return;
-    }
-    setShowTransferConfirm(true);
+    if (!transfer.recipient_name.trim() || !transfer.recipient_bank.trim() || !/^\d{8,20}$/.test(transfer.recipient_account.replace(/\s/g,''))) { setError('Enter the recipient name, bank and a valid account number.'); return; }
+    if (!Number.isFinite(Number(transfer.amount)) || Number(transfer.amount) <= 0 || !transfer.description.trim()) { setError('Enter a valid amount and transfer description.'); return; }
+    if (!account?.transfer_approved) { setError('Your administrator has not approved transfers for this simulator account yet.'); return; }
+    if (!profile?.demo_pin_set_at) { setError('An administrator must issue your simulator passcode before you can continue.'); return; }
+    setTransfer(old => ({ ...old, pin: '' })); setShowPinPrompt(true);
+  };
+  const verifyTransferPin = async () => {
+    setError('');
+    if (!/^\d{4,6}$/.test(transfer.pin)) { setError('Enter the 4–6 digit passcode issued by your administrator.'); return; }
+    try { const result:any = await act({ action:'verify_transfer_pin', pin:transfer.pin }); if (!result?.valid) { setError('Wrong passcode. Please check it and try again.'); return; } if (result.notice) setTransferNotice(result.notice); setShowPinPrompt(false); setShowTransferConfirm(true); }
+    catch(err:any) { setError(err.message || 'Passcode verification failed.'); }
   };
   const confirmTransfer = async () => {
     setError('');
-    if (!account?.transfer_approved) { setError('Your administrator has not approved transfers for this simulator account yet.'); return; }
-    if (!profile?.demo_pin_set_at) { setError('An administrator must issue your simulator PIN before you can continue.'); return; }
-    if (!/^\d{4,6}$/.test(transfer.pin)) { setError('Enter the 4–6 digit simulator PIN issued by your administrator.'); return; }
+    if (!account?.transfer_approved || !profile?.demo_pin_set_at) { setError('Transfer access is not enabled for this simulator account.'); return; }
     try {
-      const description = `To ${transfer.recipient_name.trim()} | ${transfer.recipient_bank.trim()} | ${transfer.recipient_account.replace(/\s/g,'')} | ${transfer.description.trim()}`.slice(0,160);
+      const description = ('To ' + transfer.recipient_name.trim() + ' | ' + transfer.recipient_bank.trim() + ' | ' + transfer.recipient_account.replace(/\s/g,'') + ' | ' + transfer.description.trim()).slice(0,160);
       await act({ action:'simulate_transfer', amount:Number(transfer.amount), description, pin:transfer.pin });
-      setTransfer({recipient_name:'',recipient_bank:'',recipient_account:'',amount:'',description:'',pin:''});
-      setShowTransferConfirm(false);
-      if(profile) await loadCustomerData(profile.id);
-      flash('Simulated transfer recorded. No real payment was sent.');
-    } catch(err:any){setError(err.message);}
+      setTransfer({recipient_name:'',recipient_bank:'',recipient_account:'',amount:'',description:'',pin:''}); setShowTransferConfirm(false); setShowPinPrompt(false);
+      if(profile) await loadCustomerData(profile.id); flash('Simulated transfer recorded. No real payment was sent.');
+    } catch(err:any) { setError(err.message); }
   };
     const startChat = async () => {
     if (!supabase || !profile) return;
