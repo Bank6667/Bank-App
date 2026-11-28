@@ -386,3 +386,22 @@
  .customer-profile-photo{width:46px;height:46px}
  .brand-color-controls{grid-template-columns:1fr}
 }
+
+/* Customer transfer workflow and admin-authorised access */
+.customer-welcome-bank-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px;color:#203b4b}
+.customer-welcome-bank-brand img,.customer-welcome-bank-brand span{width:34px;height:34px;object-fit:contain;border-radius:9px}
+.customer-welcome-bank-brand span{display:grid;place-items:center;background:var(--brand-primary,#163b55);color:#fff;font-weight:800}
+.customer-welcome-bank-brand b{font-size:13px;letter-spacing:.01em}
+.transfer-form-panel .stack-form{gap:15px}
+.transfer-form-panel .stack-form label{font-size:12px;font-weight:650;color:#435563}
+.transfer-form-panel .stack-form input{min-height:48px;border-radius:11px}
+.transfer-form-panel .primary{min-height:50px;display:flex;align-items:center;justify-content:center;gap:9px}
+.customer-app .modal .credential{margin:9px 0}
+.customer-app .modal .credential b{overflow-wrap:anywhere}
+.customer-app .modal .alert{margin:12px 0}
+.customer-app .modal .full+.full{margin-top:8px}
+@media(max-width:599px){
+ .customer-welcome-bank-brand{margin-bottom:10px}
+ .transfer-form-panel{padding:17px}
+ .transfer-form-panel .stack-form input{min-height:46px}
+}
