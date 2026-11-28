@@ -41,3 +41,65 @@
 .card-meta b{font-size:12px;color:#345065}
 .card-meta small{font-size:10px;color:#84939e}
 @media(max-width:760px){.profile-field-grid,.customer-details-grid{grid-template-columns:1fr}.detail-list>div{gap:10px}.detail-list span{flex-basis:34%}.simulated-card-art{min-height:165px}}
+
+/* Refined private-client banking presentation */
+.customer-app{background:#f4f6f8;color:#1b2b39}
+.customer-app .sidebar{background:#10283c;width:250px;padding:27px 18px}
+.customer-app .brand-mark{border-radius:9px;background:#c6a66d;color:#142c40;box-shadow:none}
+.customer-app .brand b{font-size:14px;letter-spacing:-.2px}
+.customer-app .brand small{font-size:8px;letter-spacing:1.8px}
+.customer-app .profile-mini{margin:34px 3px 28px;padding:14px 10px;border:1px solid #ffffff16;border-radius:10px;background:#ffffff08}
+.customer-app .nav-label{font-size:9px;letter-spacing:1.8px;color:#91a4b3}
+.customer-app .nav-item{border-radius:7px;margin:3px 0;padding:12px 13px;font-size:12px;color:#c1ced8}
+.customer-app .nav-item.active{background:#ffffff13;color:#fff;box-shadow:inset 2px 0 #c6a66d}
+.customer-app .main-area{margin-left:250px}
+.customer-app .topbar{height:88px;background:#fff;border-bottom:1px solid #e8edf0;padding:0 42px}
+.customer-app .topbar h1{font-size:18px;letter-spacing:-.35px;color:#1c3447}
+.customer-app .breadcrumb{font-size:10px;letter-spacing:.25px}
+.customer-app .content{max-width:1480px;padding:34px 42px 60px}
+.customer-app .welcome-row h2{font-size:25px;letter-spacing:-.8px;color:#1a3042}
+.customer-app .eyebrow{font-size:9px;letter-spacing:1.9px;color:#9b7b45}
+.customer-app .muted{font-size:12px;color:#87939d}
+.customer-app .panel{border:1px solid #e7ebee;border-radius:10px;box-shadow:0 2px 8px #152c3b05;padding:22px}
+.customer-app .panel-heading h3{font-size:14px;letter-spacing:-.2px;color:#20394d}
+.customer-app .panel-heading p{font-size:10px;color:#8b98a2}
+.customer-app .balance-card{background:linear-gradient(115deg,#112d43 0%,#1e4557 100%);border-radius:12px;padding:29px 32px;box-shadow:0 12px 26px #152f4317}
+.customer-app .balance-card h2{font-size:32px;letter-spacing:-1px;font-weight:700}
+.customer-app .balance-card-head span{font-size:9px;letter-spacing:1.7px}
+.customer-app .balance-icon{border-radius:10px;color:#d5bd8d}
+.customer-app .account-meta{font-size:10px;gap:30px}
+.customer-app .account-meta span:nth-child(2){font-variant-numeric:tabular-nums;letter-spacing:1px}
+.customer-app .customer-details-grid{gap:16px}
+.customer-app .detail-list>div{padding:12px 0}
+.customer-app .detail-list span{font-size:10px;color:#87939d}
+.customer-app .detail-list b{font-size:11px;color:#2c4151;font-weight:600}
+.customer-app .quick-actions{gap:12px}
+.customer-app .quick-actions button{border:1px solid #e7ebee;border-radius:9px;padding:15px 17px;box-shadow:0 2px 8px #152c3b05;transition:all .18s ease}
+.customer-app .quick-actions button:hover{transform:translateY(-2px);border-color:#c7b58f;box-shadow:0 7px 18px #152c3b0c}
+.customer-app .quick-actions button>span{background:#f2f0e9;color:#927748;border-radius:8px}
+.customer-app .quick-actions b{font-size:11px;color:#243d50}
+.customer-app .quick-actions small{font-size:9px;color:#87939d}
+.customer-app table{min-width:560px}
+.customer-app th{background:#f8f9fa;font-size:9px;letter-spacing:1px;padding:13px 11px}
+.customer-app td{font-size:11px;padding:14px 11px;color:#536473}
+.customer-app .status{font-size:9px;letter-spacing:.15px}
+.customer-app .auth-art{background:linear-gradient(145deg,#10283c,#1a4054);padding:54px}
+.customer-app .auth-art-inner{max-width:470px}
+.customer-app .auth-art .brand{margin-bottom:100px}
+.customer-app .auth-art h1{font-size:46px;line-height:1.08;letter-spacing:-1.8px;max-width:420px}
+.customer-app .auth-art-inner>p{font-size:13px;line-height:1.8;color:#c1cdd6}
+.customer-app .auth-main{background:#fff}
+.customer-app .login-card h2{font-size:27px;letter-spacing:-.7px}
+.customer-app .login-card label{font-size:11px}
+.customer-app .login-card input{height:46px;border-radius:7px;font-size:12px}
+.customer-app .primary{background:#163b55;border-color:#163b55;border-radius:7px;min-height:44px;font-size:11px;letter-spacing:.2px}
+.customer-app .primary:hover{background:#234e68}
+.customer-app .login-help{margin-top:19px!important}
+.auth-signboard{display:flex;align-items:flex-start;gap:12px;margin-top:70px;padding:17px 18px;border:1px solid #ffffff35;border-radius:8px;background:#ffffff0b;color:#d5e0e8;font-size:10px;line-height:1.65;max-width:390px}
+.auth-signboard svg{flex:none;color:#d4bd8d}
+.customer-app .customer-bank-banner{max-height:145px;border-radius:9px}
+.customer-app .simulated-card-art{border-radius:12px;box-shadow:none}
+.customer-app .card-meta b{font-size:11px}
+.customer-app .global-alert{border-radius:7px}
+@media(min-width:1500px){.customer-app .content{padding-left:54px;padding-right:54px}.customer-app .customer-details-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.customer-app .sidebar{width:270px}.customer-app .main-area{margin-left:0}.customer-app .topbar{height:76px;padding:0 16px}.customer-app .content{padding:20px 15px 36px}.customer-app .balance-card{padding:21px}.customer-app .balance-card h2{font-size:25px}.customer-app .customer-details-grid{grid-template-columns:1fr}.customer-app .auth-art{display:none}.auth-signboard{margin-top:24px}}
