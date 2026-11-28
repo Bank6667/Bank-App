@@ -423,3 +423,65 @@
 .chat-heading .danger{color:#a43d42}
 .chat-compose{gap:8px}
 @media(max-width:599px){.chat-attach{width:40px;height:40px}.chat-attachment{max-width:100%;max-height:220px}}
+
+
+/* Neutral shared sign-in page: the bank identity is shown only after authentication */
+.auth-page .generic-auth-main{grid-column:1/-1;min-height:100vh;width:100%;padding:28px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:radial-gradient(ellipse at top,#edf3f6 0%,#f7f9fa 58%,#f1f4f6 100%)}
+.auth-neutral-heading{display:flex;align-items:center;gap:9px;color:#526b7c;font-size:10px;font-weight:800;letter-spacing:2px}
+.generic-auth-main .login-card{width:min(100%,430px);padding:36px;background:#fff;border:1px solid #e6ebee;border-radius:18px;box-shadow:0 22px 70px #18354d12}
+.generic-auth-main .login-card .eyebrow{margin-bottom:8px}
+.generic-auth-main .auth-signboard{display:flex;align-items:flex-start;gap:9px;margin-top:22px;padding:12px 13px;border:1px solid #e9dfca;background:#fbf8f1;color:#806b48;border-radius:9px;font-size:10px;line-height:1.55}
+.generic-auth-main .auth-signboard svg{flex:none}
+.language-picker{display:flex;align-items:center;gap:7px;font-size:10px;color:#778792;white-space:nowrap}
+.language-picker select{height:34px;max-width:124px;padding:0 8px;border:1px solid #e1e7ea;border-radius:8px;background:#fff;color:#344d5d;font-size:11px}
+.language-settings-panel{grid-column:1/-1}
+.language-settings-panel>label{display:grid;gap:8px;max-width:320px;font-size:12px;font-weight:650;color:#465b69}
+.language-settings-panel select{height:44px;padding:0 12px;border:1px solid #dfe6e9;border-radius:9px;background:#fff;color:#263f50}
+.customer-app .topbar .top-actions{gap:12px}
+.customer-app .customer-welcome-bank-brand img{background:#fff;padding:3px}
+.customer-app .brand-logo-image{object-fit:contain}
+@media(max-width:700px){
+ .auth-page .generic-auth-main{padding:18px 14px}
+ .generic-auth-main .login-card{padding:25px 20px;border-radius:14px}
+ .language-picker span{display:none}
+ .language-picker select{max-width:92px;height:32px;font-size:10px}
+ .customer-app .topbar{padding:0 12px;gap:8px}
+ .customer-app .topbar h1{font-size:16px}
+ .customer-app .top-actions{gap:5px}
+ .customer-app .top-user span{display:none}
+ .customer-app .content{padding:18px 14px 38px}
+ .customer-app .panel{padding:16px}
+ .customer-app .section-intro{align-items:flex-start}
+ .customer-app .profile-field-grid{grid-template-columns:minmax(0,1fr)}
+ .customer-app .stack-form{min-width:0}
+ .customer-app input,.customer-app select,.customer-app textarea{max-width:100%;min-width:0}
+ .customer-app .chat-compose{display:flex;align-items:center}
+ .customer-app .chat-compose input{min-width:0;flex:1}
+ .customer-app .modal-backdrop{padding:12px;align-items:flex-end}
+ .customer-app .modal{width:100%;max-width:520px;max-height:88dvh;overflow:auto;border-radius:18px 18px 12px 12px;padding:22px 18px}
+ .customer-app .customer-quick-strip{grid-template-columns:1fr;gap:8px}
+ .customer-app .customer-quick-strip>button{min-height:62px;padding:12px}
+ .customer-app .customer-hero{grid-template-columns:minmax(0,1fr);gap:18px}
+ .customer-app .hero-visual{display:none}
+ .customer-app .hero-actions{flex-wrap:wrap}
+ .customer-app .hero-actions button{flex:1;min-width:130px;justify-content:center}
+ .customer-app .customer-overview-grid{grid-template-columns:minmax(0,1fr)}
+ .customer-app .customer-side-column{min-width:0}
+ .customer-app .customer-transaction-row{min-width:0}
+ .customer-app .customer-tx-description{min-width:0;overflow-wrap:anywhere}
+ .customer-app .customer-tx-description b{max-width:100%;overflow-wrap:anywhere}
+ .customer-app .table-wrap{max-width:100%;overflow-x:auto}
+ .customer-app .table-wrap table{min-width:620px}
+ .customer-app .settings-action-row{grid-template-columns:1fr}
+}
+@media(max-width:380px){
+ .customer-app .topbar .breadcrumb{display:none}
+ .customer-app .topbar h1{font-size:15px}
+ .customer-app .customer-hero{padding:18px 15px}
+ .customer-app .hero-balance-value{font-size:25px}
+ .customer-app .hero-account-line{gap:8px;flex-wrap:wrap}
+ .customer-app .hero-actions button{min-width:100%;width:100%}
+ .language-picker select{max-width:78px}
+}
+[dir="rtl"] .customer-app .customer-welcome-identity,[dir="rtl"] .customer-app .customer-detail-line,[dir="rtl"] .customer-app .account-details-list>div{direction:rtl}
+[dir="rtl"] .customer-app .customer-transaction-row{direction:rtl}
