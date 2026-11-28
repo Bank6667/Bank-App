@@ -20,8 +20,8 @@ const money = (amount: number, currency = 'NGN') => {
 };
 const dateText = (value: string) => new Date(value).toLocaleString();
 const isValidIban = (value: string) => {
-  const iban = value.replace(/\\s/g, '').toUpperCase();
-  if (!/^[A-Z]{2}\\d{2}[A-Z0-9]{11,30}$/.test(iban)) return false;
+  const iban = value.replace(/\s/g, '').toUpperCase();
+  if (!/^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/.test(iban)) return false;
   const rearranged = iban.slice(4) + iban.slice(0, 4);
   let remainder = 0;
   for (const char of rearranged) {
@@ -340,7 +340,7 @@ export default function App() {
     const accountIdentifier = transfer.recipient_account.replace(/\s/g,'').toUpperCase();
     const validIdentifier = transfer.transfer_type === 'international' ? /^[A-Z0-9]{8,34}$/.test(accountIdentifier) : /^\d{8,20}$/.test(accountIdentifier);
     if (!transfer.recipient_name.trim() || !transfer.recipient_bank.trim() || !validIdentifier) { setError(transfer.transfer_type === 'international' ? 'Enter the beneficiary name, bank and a valid IBAN or international account identifier.' : 'Enter the recipient name, bank and a valid account number.'); return; }
-    if (transfer.transfer_type === 'international' && (!/^[A-Z]{2}$/.test(transfer.recipient_country.trim().toUpperCase()) || !/^[A-Z]{3}$/.test(transfer.recipient_currency.trim().toUpperCase()) || !/^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/.test(transfer.swift_bic.trim().toUpperCase()) || (/^[A-Z]{2}\\d{2}/.test(accountIdentifier) && !isValidIban(accountIdentifier)))) { setError('Check the destination country, ISO currency, SWIFT/BIC format and IBAN checksum.'); return; }
+    if (transfer.transfer_type === 'international' && (!/^[A-Z]{2}$/.test(transfer.recipient_country.trim().toUpperCase()) || !/^[A-Z]{3}$/.test(transfer.recipient_currency.trim().toUpperCase()) || !/^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/.test(transfer.swift_bic.trim().toUpperCase()) || (/^[A-Z]{2}\d{2}/.test(accountIdentifier) && !isValidIban(accountIdentifier)))) { setError('Check the destination country, ISO currency, SWIFT/BIC format and IBAN checksum.'); return; }
     if (!Number.isFinite(Number(transfer.amount)) || Number(transfer.amount) <= 0 || !transfer.description.trim()) { setError('Enter a valid amount and transfer description.'); return; }
     if (!account?.transfer_approved) { setError('Your administrator has not approved transfers for this simulator account yet.'); return; }
     if (!profile?.demo_pin_set_at) { setError('An administrator must issue your simulator passcode before you can continue.'); return; }
