@@ -126,3 +126,92 @@
 .customer-app .brand-logo-image{width:40px;height:40px;background:#fff;border-radius:8px;padding:4px}
 .balance-bank-logo{width:58px;height:58px;object-fit:contain;background:#fff;border-radius:10px;padding:6px;margin-bottom:15px}
 .admin-image-preview.logo-preview{width:116px;height:76px;object-fit:contain;background:#f8f9fa;border:1px solid #e4e9ed;border-radius:8px;padding:8px}
+
+
+/* Customer experience redesign — editorial, spacious, and finance-led */
+.customer-app{background:#f6f7f8;color:#172d3b}
+.customer-app .sidebar{background:#102c3b;width:258px;padding:30px 20px}
+.customer-app .main-area{margin-left:258px}
+.customer-app .topbar{height:86px;padding:0 52px;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);border-bottom:1px solid #e9edef}
+.customer-app .content{max-width:1540px;padding:38px 52px 72px}
+.customer-app .welcome-row{display:none}
+.customer-app .customer-welcome{display:flex;justify-content:space-between;align-items:flex-end;margin:0 0 26px;gap:20px}
+.customer-app .customer-welcome .eyebrow{font-size:9px;letter-spacing:2px;color:#a1814b;margin-bottom:10px}
+.customer-app .customer-welcome h2{font:650 29px/1.2 Manrope,sans-serif;letter-spacing:-1.1px;color:#173447;margin:0 0 7px}
+.customer-app .customer-welcome p{font-size:12px;color:#84919a;margin:0}
+.welcome-date{display:grid;gap:7px;text-align:right}
+.welcome-date>span{font-size:8px;letter-spacing:1.6px;color:#98a2a9}
+.welcome-date>b{font-size:11px;text-transform:capitalize;color:#345363}
+.welcome-date i{display:inline-block;width:7px;height:7px;background:#58a27a;border-radius:50%;margin-right:6px}
+.customer-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);min-height:310px;border-radius:18px;background:linear-gradient(112deg,#112f40 0%,#174254 58%,#27606a 100%);padding:36px 42px;color:#fff;box-shadow:0 18px 42px #1238491c;margin-bottom:22px}
+.customer-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 78% 16%,#ffffff15,transparent 42%),linear-gradient(125deg,transparent 40%,#ffffff08 100%);pointer-events:none}
+.hero-orbit{position:absolute;border:1px solid #ffffff13;border-radius:50%;pointer-events:none}
+.hero-orbit-one{width:460px;height:460px;right:7%;top:-310px}
+.hero-orbit-two{width:590px;height:590px;right:-3%;top:-360px}
+.hero-copy,.hero-visual{position:relative;z-index:1}
+.hero-brandline{display:flex;align-items:center;gap:11px;margin-bottom:36px;font:650 12px Manrope,sans-serif;letter-spacing:.1px}
+.hero-brandline img,.hero-brand-monogram{width:37px;height:37px;object-fit:contain;background:#fff;border-radius:9px;padding:4px;color:#17394a;display:grid;place-items:center;font-weight:800}
+.hero-brandline span small{display:block;margin-top:4px;font:500 8px Manrope,sans-serif;letter-spacing:1.7px;color:#b5c8ce}
+.hero-balance-label{font-size:9px;letter-spacing:1.9px;color:#c0d0d4}
+.hero-balance-label span{color:#d5bd8d;padding:0 5px}
+.hero-balance-value{font:650 clamp(27px,3vw,40px)/1.2 Manrope,sans-serif;letter-spacing:-1.3px;margin:10px 0 20px;font-variant-numeric:tabular-nums}
+.hero-account-line{display:flex;gap:22px;align-items:center;color:#c1d0d4;font-size:10px}
+.hero-account-line b{font-weight:550;letter-spacing:1.6px;color:#e8eff0}
+.hero-actions{display:flex;gap:10px;margin-top:27px}
+.hero-actions button{display:flex;align-items:center;gap:8px;padding:11px 15px;border:1px solid #ffffff38;border-radius:7px;background:#ffffff12;color:#fff;font:600 10px Manrope;cursor:pointer;transition:.2s}
+.hero-actions button:first-child{background:#d6bd8b;border-color:#d6bd8b;color:#193747}
+.hero-actions button:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.hero-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:230px}
+.hero-glass-card{width:min(100%,310px);height:184px;padding:19px 21px;border:1px solid #ffffff55;border-radius:14px;background:linear-gradient(135deg,#ffffff30,#ffffff0c 75%);box-shadow:0 22px 45px #071e2b45;backdrop-filter:blur(12px);transform:rotate(-5deg);display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.hero-glass-card:after{content:"";position:absolute;width:190px;height:190px;border:1px solid #ffffff30;border-radius:50%;right:-60px;top:-90px}
+.glass-card-top,.glass-card-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative;z-index:1}
+.glass-card-top{font:650 10px Manrope;letter-spacing:.5px}.glass-card-top span:last-child{font-size:8px;letter-spacing:1.7px;color:#e0d0a9}
+.glass-chip{width:29px;height:23px;border-radius:5px;background:linear-gradient(135deg,#f1dfad,#b99a5c);border:1px solid #fff8;position:relative;z-index:1}
+.glass-card-number{font:550 13px Manrope;letter-spacing:1.3px;position:relative;z-index:1}
+.glass-card-bottom{font-size:8px;letter-spacing:1px;color:#e2ebed;text-transform:uppercase}
+.hero-visual-caption{font-size:9px;color:#b8cbd0;margin-top:22px;letter-spacing:.5px}
+.customer-quick-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:32px}
+.customer-quick-strip>button{display:flex;align-items:center;gap:13px;text-align:left;padding:17px 18px;border:1px solid #e8ecee;border-radius:11px;background:#fff;cursor:pointer;transition:.2s;min-width:0}
+.customer-quick-strip>button:hover{border-color:#c9b68e;transform:translateY(-2px);box-shadow:0 9px 22px #1738490b}
+.customer-quick-strip>button>span:nth-child(2){display:grid;gap:5px;min-width:0;flex:1}
+.quick-icon{width:39px;height:39px;display:grid;place-items:center;border-radius:10px;background:#f3f0e8;color:#987b4d;flex:none}
+.quick-icon svg{width:18px;height:18px}
+.customer-quick-strip b{font:650 11px Manrope;color:#203d4e}
+.customer-quick-strip small{font-size:9px;color:#8b989f}
+.customer-quick-strip>button>svg{width:14px;height:14px;color:#a4afb4;transform:rotate(-90deg)}
+.customer-overview-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px,.85fr);gap:34px;align-items:start}
+.customer-section-heading,.customer-side-heading{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:13px}
+.customer-section-heading>div>span,.customer-side-heading>span{font-size:8px;letter-spacing:1.8px;color:#a18455}
+.customer-section-heading h3,.customer-side-heading h3{font:650 17px Manrope;color:#203b4d;margin:6px 0 0;letter-spacing:-.4px}
+.customer-section-heading>button{display:flex;align-items:center;gap:5px;border:0;background:transparent;color:#8b7045;font:600 10px Manrope;cursor:pointer}
+.customer-transactions{background:#fff;border:1px solid #e9edef;border-radius:12px;padding:2px 20px}
+.customer-transaction-row{display:flex;align-items:center;gap:13px;padding:17px 0;border-bottom:1px solid #eff1f2}
+.customer-transaction-row:last-child{border-bottom:0}
+.customer-tx-icon{width:37px;height:37px;border-radius:50%;display:grid;place-items:center;flex:none;background:#eef4f1;color:#53866a}
+.customer-tx-icon.out{background:#f5f1ea;color:#9a7c4d}
+.customer-tx-icon svg{width:17px;height:17px}
+.customer-tx-description,.customer-tx-amount{display:grid;gap:5px;min-width:0}
+.customer-tx-description{flex:1}
+.customer-tx-description b{font:600 11px Manrope;color:#304858;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.customer-tx-description small,.customer-tx-amount small{font-size:9px;color:#9aa5aa}
+.customer-tx-amount{text-align:right}
+.customer-tx-amount b{font:650 11px Manrope;font-variant-numeric:tabular-nums}
+.customer-tx-amount b.in{color:#4b8a68}.customer-tx-amount b.out{color:#344e5c}
+.customer-side-column{background:#fff;border:1px solid #e9edef;border-radius:12px;padding:22px 23px}
+.customer-side-heading{display:block;margin-bottom:14px}
+.customer-detail-line{display:flex;justify-content:space-between;gap:14px;padding:13px 0;border-top:1px solid #eff1f2}
+.customer-detail-line span{font-size:10px;color:#929da4}
+.customer-detail-line b{font:600 10px Manrope;color:#405664;text-align:right;overflow-wrap:anywhere}
+.customer-side-footer{display:flex;align-items:flex-start;gap:9px;margin-top:13px;padding:12px;background:#f7f6f1;border-radius:8px;color:#8d7956;font-size:9px;line-height:1.55}
+.customer-side-footer svg{flex:none}
+.customer-app .customer-bank-banner{margin-top:24px;border-radius:12px;max-height:150px}
+.customer-app .panel{box-shadow:none}
+.customer-app .sidebar .brand b{font-size:13px}
+.customer-app .nav-item{font-size:11px;letter-spacing:.1px}
+.customer-app .nav-item.active{background:#ffffff12}
+.customer-app .top-user span{font-size:11px}
+.customer-app .notification-btn{border-radius:50%}
+@media(min-width:1500px){.customer-app .content{padding-left:64px;padding-right:64px}.customer-hero{min-height:330px;padding:42px 48px}.hero-visual{transform:scale(1.06)}}
+@media(max-width:1100px){.customer-app .content{padding-left:28px;padding-right:28px}.customer-hero{padding:28px;grid-template-columns:1.1fr .9fr}.customer-overview-grid{grid-template-columns:minmax(0,1.3fr) minmax(245px,.8fr);gap:18px}}
+@media(max-width:760px){.customer-app .main-area{margin-left:0}.customer-app .topbar{padding:0 16px;height:72px}.customer-app .content{padding:22px 15px 38px}.customer-app .customer-welcome{align-items:flex-start;margin-bottom:18px}.customer-app .customer-welcome h2{font-size:23px}.welcome-date{display:none}.customer-hero{grid-template-columns:1fr;padding:23px 21px;min-height:unset;border-radius:14px}.hero-brandline{margin-bottom:27px}.hero-balance-value{font-size:29px}.hero-visual{display:none}.hero-actions{flex-wrap:wrap}.customer-quick-strip{grid-template-columns:1fr;gap:8px;margin-bottom:25px}.customer-quick-strip>button{padding:12px}.customer-overview-grid{grid-template-columns:1fr;gap:20px}.customer-transactions{padding:2px 13px}.customer-transaction-row{gap:9px}.customer-tx-description b{font-size:10px}.customer-tx-amount b{font-size:10px}.customer-side-column{padding:18px}.customer-app .customer-bank-banner{margin-top:18px}}
+@media(min-width:761px) and (max-width:1050px){.hero-visual{transform:scale(.86)}.customer-hero{grid-template-columns:1.2fr .8fr}.customer-overview-grid{grid-template-columns:1fr}}
