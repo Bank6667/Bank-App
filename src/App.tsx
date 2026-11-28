@@ -145,7 +145,7 @@ export default function App() {
       .on('postgres_changes',{event:'*',schema:'public',table:'profiles',filter:'id=eq.'+profile.id},async()=>{if(profile.role==='customer'){const {data}=await supabase!.from('profiles').select('*').eq('id',profile.id).maybeSingle();if(data)setProfile(await addAvatarDisplayUrl(data as Profile));}})
       .on('postgres_changes',{event:'*',schema:'public',table:'demo_transactions'},()=>profile.role==='customer' ? loadCustomerData(profile.id) : loadAdminData())
       .on('postgres_changes',{event:'*',schema:'public',table:'support_messages'},()=>activeConversation && loadMessages(activeConversation))
-      .on('postgres_changes',{event:'*',schema:'public',table:'app_settings',filter:'key=eq.brand_config'},()=>loadSettings())
+      
       .subscribe();
     return () => { supabase!.removeChannel(channel); };
   }, [profile, activeConversation, loadCustomerData, loadAdminData, loadMessages]);
