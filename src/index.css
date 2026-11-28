@@ -405,3 +405,13 @@
  .transfer-form-panel{padding:17px}
  .transfer-form-panel .stack-form input{min-height:46px}
 }
+
+.customer-app .account-details-list{display:grid;gap:0}
+.customer-app .account-details-list>div{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:14px 0;border-bottom:1px solid #e9eef0}
+.customer-app .account-details-list>div:last-child{border-bottom:0}
+.customer-app .account-details-list span{font-size:12px;color:#7b8991}
+.customer-app .account-details-list b{font-size:13px;text-align:right;overflow-wrap:anywhere;color:#233b4a}
+.settings-action-panel{grid-column:1/-1}
+.settings-action-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.settings-action-row button{display:flex;align-items:center;gap:8px}
+@media(max-width:599px){.customer-app .account-details-list>div{padding:12px 0}.settings-action-row{display:grid;grid-template-columns:1fr}.settings-action-row button{justify-content:center}}
