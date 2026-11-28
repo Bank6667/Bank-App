@@ -485,3 +485,7 @@
 }
 [dir="rtl"] .customer-app .customer-welcome-identity,[dir="rtl"] .customer-app .customer-detail-line,[dir="rtl"] .customer-app .account-details-list>div{direction:rtl}
 [dir="rtl"] .customer-app .customer-transaction-row{direction:rtl}
+
+.auth-neutral-heading{width:min(100%,430px);justify-content:space-between}
+.auth-secure-label{display:flex;align-items:center;gap:9px}
+@media(max-width:420px){.auth-neutral-heading .language-picker span{display:none}.auth-neutral-heading .language-picker select{max-width:90px}}
