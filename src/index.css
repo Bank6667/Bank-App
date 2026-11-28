@@ -103,3 +103,7 @@
 .customer-app .global-alert{border-radius:7px}
 @media(min-width:1500px){.customer-app .content{padding-left:54px;padding-right:54px}.customer-app .customer-details-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.customer-app .sidebar{width:270px}.customer-app .main-area{margin-left:0}.customer-app .topbar{height:76px;padding:0 16px}.customer-app .content{padding:20px 15px 36px}.customer-app .balance-card{padding:21px}.customer-app .balance-card h2{font-size:25px}.customer-app .customer-details-grid{grid-template-columns:1fr}.customer-app .auth-art{display:none}.auth-signboard{margin-top:24px}}
+
+.auth-mobile-signboard{display:none;align-items:flex-start;gap:8px;margin-top:18px;padding:12px;border:1px solid #e6ddca;border-radius:7px;background:#faf8f2;color:#756344;font-size:9px;line-height:1.55}
+.auth-mobile-signboard svg{flex:none}
+@media(max-width:760px){.auth-mobile-signboard{display:flex}}
