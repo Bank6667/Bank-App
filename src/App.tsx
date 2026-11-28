@@ -12,7 +12,7 @@ type Account = { id: string; user_id: string; created_at?: string; display_accou
 type Tx = { id: string; description: string; amount: number; direction: 'in'|'out'; status: string; occurred_at: string; currency_code?: string };
 type Notice = { id: string; title: string; body: string; read_at: string | null; created_at: string };
 type Conversation = { id: string; customer_id: string; status: string; last_message_at: string; customer?: Profile };
-type Message = { id: string; sender_id: string; body: string; created_at: string };
+type Message = { id: string; sender_id: string; body: string; created_at: string; attachment_path?: string | null; attachment_mime_type?: string | null; attachment_name?: string | null; attachment_url?: string | null };
 const money = (amount: number, currency = 'NGN') => {
   const code = /^[A-Z]{3}$/.test(currency) ? currency : 'NGN';
   try { return new Intl.NumberFormat('en-NG', { style: 'currency', currency: code, maximumFractionDigits: 2 }).format(Number(amount || 0)); }
@@ -110,7 +110,13 @@ export default function App() {
   const loadMessages = useCallback(async (conversationId: string) => {
     if (!supabase || !conversationId) return;
     const { data, error: e } = await supabase.from('support_messages').select('*').eq('conversation_id', conversationId).order('created_at');
-    if (e) throw e; setMessages(data || []);
+    if (e) throw e;
+    const hydrated = await Promise.all((data || []).map(async (message:any) => {
+      if (!message.attachment_path) return message;
+      const { data: signed } = await supabase!.storage.from('support-attachments').createSignedUrl(message.attachment_path, 3600);
+      return { ...message, attachment_url: signed?.signedUrl || null };
+    }));
+    setMessages(hydrated as Message[]);
   }, []);
   const refresh = useCallback(async (current: Profile) => {
     await loadSettings();
@@ -386,6 +392,46 @@ export default function App() {
       const {error:e2}=await supabase.from('support_messages').insert({conversation_id:activeConversation,customer_id:customerId,sender_id:profile.id,body:chatText.trim()});
       if(e2)throw e2; setChatText(''); await loadMessages(activeConversation);
     }catch(err:any){setError(err.message);}
+  };
+  const sendChatImage = async (file?: File) => {
+    if (!supabase || !profile || !activeConversation || !file) return;
+    if (!['image/jpeg','image/png','image/webp','image/gif'].includes(file.type) || file.size < 1 || file.size > 5 * 1024 * 1024) {
+      setError('Choose a JPG, PNG, WebP or GIF image up to 5 MB.'); return;
+    }
+    const convo = conversations.find(c=>c.id===activeConversation);
+    const customerId = profile.role==='customer' ? profile.id : convo?.customer_id;
+    if (!customerId) { setError('Choose a support conversation first.'); return; }
+    try {
+      setBusy(true);
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g,'_').slice(-100) || 'image';
+      const path = customerId + '/' + activeConversation + '/' + Date.now() + '-' + safeName;
+      const { error: uploadError } = await supabase.storage.from('support-attachments').upload(path,file,{contentType:file.type,upsert:false,cacheControl:'3600'});
+      if (uploadError) throw uploadError;
+      const { error: messageError } = await supabase.from('support_messages').insert({
+        conversation_id:activeConversation,customer_id:customerId,sender_id:profile.id,body:'Image attachment',
+        attachment_path:path,attachment_mime_type:file.type,attachment_name:safeName,attachment_size_bytes:file.size
+      });
+      if (messageError) { await supabase.storage.from('support-attachments').remove([path]); throw messageError; }
+      await loadMessages(activeConversation); flash('Image sent to customer support.');
+    } catch(err:any) { setError(err.message || 'Image could not be sent.'); }
+    finally { setBusy(false); }
+  };
+  const deleteConversation = async () => {
+    if (!supabase || !activeConversation) return;
+    if (!window.confirm('Delete this support conversation and its messages? This cannot be undone.')) return;
+    try {
+      setBusy(true);
+      const { data: attachments, error: listError } = await supabase.from('support_messages').select('attachment_path').eq('conversation_id',activeConversation).not('attachment_path','is',null);
+      if (listError) throw listError;
+      const paths = (attachments || []).map((x:any)=>x.attachment_path).filter(Boolean);
+      if (paths.length) { const { error: removeError } = await supabase.storage.from('support-attachments').remove(paths); if (removeError) throw removeError; }
+      const { error: deleteError } = await supabase.from('support_conversations').delete().eq('id',activeConversation);
+      if (deleteError) throw deleteError;
+      setMessages([]); setActiveConversation('');
+      if (profile.role==='admin') await loadAdminData(); else await loadCustomerData(profile.id);
+      flash('Conversation deleted.');
+    } catch(err:any) { setError(err.message || 'Conversation could not be deleted.'); }
+    finally { setBusy(false); }
   };
   const uploadBankBrandLogo = async (file?: File) => {
     if (!supabase || !file) return;
