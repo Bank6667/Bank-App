@@ -215,3 +215,151 @@
 @media(max-width:1100px){.customer-app .content{padding-left:28px;padding-right:28px}.customer-hero{padding:28px;grid-template-columns:1.1fr .9fr}.customer-overview-grid{grid-template-columns:minmax(0,1.3fr) minmax(245px,.8fr);gap:18px}}
 @media(max-width:760px){.customer-app .main-area{margin-left:0}.customer-app .topbar{padding:0 16px;height:72px}.customer-app .content{padding:22px 15px 38px}.customer-app .customer-welcome{align-items:flex-start;margin-bottom:18px}.customer-app .customer-welcome h2{font-size:23px}.welcome-date{display:none}.customer-hero{grid-template-columns:1fr;padding:23px 21px;min-height:unset;border-radius:14px}.hero-brandline{margin-bottom:27px}.hero-balance-value{font-size:29px}.hero-visual{display:none}.hero-actions{flex-wrap:wrap}.customer-quick-strip{grid-template-columns:1fr;gap:8px;margin-bottom:25px}.customer-quick-strip>button{padding:12px}.customer-overview-grid{grid-template-columns:1fr;gap:20px}.customer-transactions{padding:2px 13px}.customer-transaction-row{gap:9px}.customer-tx-description b{font-size:10px}.customer-tx-amount b{font-size:10px}.customer-side-column{padding:18px}.customer-app .customer-bank-banner{margin-top:18px}}
 @media(min-width:761px) and (max-width:1050px){.hero-visual{transform:scale(.86)}.customer-hero{grid-template-columns:1.2fr .8fr}.customer-overview-grid{grid-template-columns:1fr}}
+
+
+/* MOBILE-FIRST CUSTOMER LAYOUT: phone defaults, then progressive enhancement */
+.customer-app{background:#f6f7f8;color:#172d3b}
+.customer-app .sidebar{width:min(86vw,280px);padding:22px 16px;transform:translateX(-100%);transition:transform .22s ease}
+.customer-app .sidebar.open{transform:translateX(0)}
+.customer-app .main-area{margin-left:0;min-width:0}
+.customer-app .topbar{height:70px;padding:0 14px;gap:10px}
+.customer-app .topbar>div:nth-child(2){min-width:0;flex:1}
+.customer-app .breadcrumb{font-size:9px;margin-bottom:3px}
+.customer-app .topbar h1{font-size:16px}
+.customer-app .top-actions{gap:9px}
+.customer-app .top-user span{display:none}
+.customer-app .content{width:100%;max-width:none;padding:19px 14px 36px}
+.customer-app .customer-welcome{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin:0 0 17px}
+.customer-app .customer-welcome .eyebrow{font-size:8px;letter-spacing:1.7px;color:#a1814b;margin-bottom:8px}
+.customer-app .customer-welcome h2{font:650 22px/1.2 Manrope,sans-serif;letter-spacing:-.7px;color:#173447;margin:0 0 6px}
+.customer-app .customer-welcome p{font-size:11px;line-height:1.5;color:#84919a;margin:0}
+.welcome-date{display:none}
+.customer-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr);min-height:0;border-radius:14px;background:linear-gradient(112deg,#112f40 0%,#174254 58%,#27606a 100%);padding:22px 19px;color:#fff;box-shadow:0 14px 32px #1238491c;margin-bottom:15px}
+.customer-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 78% 16%,#ffffff15,transparent 42%),linear-gradient(125deg,transparent 40%,#ffffff08 100%);pointer-events:none}
+.hero-orbit{position:absolute;border:1px solid #ffffff13;border-radius:50%;pointer-events:none}
+.hero-orbit-one{width:330px;height:330px;right:-25%;top:-235px}
+.hero-orbit-two{width:420px;height:420px;right:-38%;top:-270px}
+.hero-copy,.hero-visual{position:relative;z-index:1}
+.hero-brandline{display:flex;align-items:center;gap:9px;margin-bottom:27px;font:650 11px Manrope,sans-serif;letter-spacing:.1px}
+.hero-brandline img,.hero-brand-monogram{width:34px;height:34px;object-fit:contain;background:#fff;border-radius:8px;padding:4px;color:#17394a;display:grid;place-items:center;font-weight:800}
+.hero-brandline span small{display:block;margin-top:3px;font:500 7px Manrope,sans-serif;letter-spacing:1.5px;color:#b5c8ce}
+.hero-balance-label{font-size:8px;letter-spacing:1.5px;color:#c0d0d4}
+.hero-balance-label span{color:#d5bd8d;padding:0 4px}
+.hero-balance-value{font:650 clamp(25px,7vw,32px)/1.2 Manrope,sans-serif;letter-spacing:-1px;margin:9px 0 17px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.hero-account-line{display:flex;flex-wrap:wrap;gap:7px 16px;align-items:center;color:#c1d0d4;font-size:9px}
+.hero-account-line b{font-weight:550;letter-spacing:1.2px;color:#e8eff0}
+.hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:22px}
+.hero-actions button{display:flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:10px 8px;border:1px solid #ffffff38;border-radius:7px;background:#ffffff12;color:#fff;font:600 9px Manrope;cursor:pointer}
+.hero-actions button:first-child{background:#d6bd8b;border-color:#d6bd8b;color:#193747}
+.hero-visual{display:none}
+.customer-quick-strip{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:23px}
+.customer-quick-strip>button{display:flex;align-items:center;gap:11px;text-align:left;padding:12px 13px;border:1px solid #e8ecee;border-radius:10px;background:#fff;min-width:0;min-height:62px}
+.customer-quick-strip>button>span:nth-child(2){display:grid;gap:4px;min-width:0;flex:1}
+.quick-icon{width:35px;height:35px;display:grid;place-items:center;border-radius:9px;background:#f3f0e8;color:#987b4d;flex:none}
+.quick-icon svg{width:17px;height:17px}
+.customer-quick-strip b{font:650 10px Manrope;color:#203d4e}
+.customer-quick-strip small{font-size:9px;color:#8b989f}
+.customer-quick-strip>button>svg{width:13px;height:13px;color:#a4afb4;transform:rotate(-90deg)}
+.customer-overview-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;align-items:start}
+.customer-section-heading,.customer-side-heading{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:11px}
+.customer-section-heading>div>span,.customer-side-heading>span{font-size:8px;letter-spacing:1.6px;color:#a18455}
+.customer-section-heading h3,.customer-side-heading h3{font:650 16px Manrope;color:#203b4d;margin:5px 0 0;letter-spacing:-.4px}
+.customer-section-heading>button{display:flex;align-items:center;gap:4px;border:0;background:transparent;color:#8b7045;font:600 9px Manrope;cursor:pointer}
+.customer-transactions{background:#fff;border:1px solid #e9edef;border-radius:10px;padding:2px 12px}
+.customer-transaction-row{display:flex;align-items:center;gap:9px;padding:14px 0;border-bottom:1px solid #eff1f2;min-width:0}
+.customer-transaction-row:last-child{border-bottom:0}
+.customer-tx-icon{width:33px;height:33px;border-radius:50%;display:grid;place-items:center;flex:none;background:#eef4f1;color:#53866a}
+.customer-tx-icon.out{background:#f5f1ea;color:#9a7c4d}
+.customer-tx-icon svg{width:15px;height:15px}
+.customer-tx-description,.customer-tx-amount{display:grid;gap:4px;min-width:0}
+.customer-tx-description{flex:1}
+.customer-tx-description b{font:600 10px Manrope;color:#304858;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.customer-tx-description small,.customer-tx-amount small{font-size:8px;color:#9aa5aa}
+.customer-tx-amount{text-align:right;max-width:46%}
+.customer-tx-amount b{font:650 10px Manrope;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.customer-tx-amount b.in{color:#4b8a68}.customer-tx-amount b.out{color:#344e5c}
+.customer-side-column{background:#fff;border:1px solid #e9edef;border-radius:10px;padding:17px 15px;min-width:0}
+.customer-side-heading{display:block;margin-bottom:12px}
+.customer-detail-line{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid #eff1f2}
+.customer-detail-line span{font-size:9px;color:#929da4}
+.customer-detail-line b{font:600 9px Manrope;color:#405664;text-align:right;overflow-wrap:anywhere;max-width:58%}
+.customer-side-footer{display:flex;align-items:flex-start;gap:8px;margin-top:11px;padding:10px;background:#f7f6f1;border-radius:7px;color:#8d7956;font-size:8px;line-height:1.5}
+.customer-side-footer svg{flex:none;width:15px;height:15px}
+.customer-app .customer-bank-banner{margin-top:17px;border-radius:9px;max-height:125px;width:100%;object-fit:cover}
+.customer-app .panel{box-shadow:none}
+.customer-app .sidebar .brand b{font-size:13px}
+.customer-app .nav-item{font-size:11px;letter-spacing:.1px}
+.customer-app .nav-item.active{background:#ffffff12}
+.customer-app .notification-btn{border-radius:50%}
+.customer-app .auth-art{display:none}
+.customer-auth .auth-main{min-height:100svh;padding:24px 16px}
+.customer-auth .login-card{width:100%;max-width:420px;margin:auto}
+.customer-auth .login-card h2{font-size:25px;letter-spacing:-.7px}
+.customer-auth .login-card label{font-size:11px}
+.customer-auth .login-card input{height:48px;border-radius:7px;font-size:13px}
+.customer-auth .primary{background:#163b55;border-color:#163b55;border-radius:7px;min-height:46px;font-size:11px;letter-spacing:.2px}
+.customer-auth .login-help{margin-top:17px!important}
+.auth-mobile-signboard{display:flex;align-items:flex-start;gap:8px;margin-top:18px;padding:12px;border:1px solid #e6ddca;border-radius:7px;background:#faf8f2;color:#756344;font-size:9px;line-height:1.55}
+.auth-mobile-signboard svg{flex:none}
+@media(min-width:600px){
+ .customer-app .content{padding:25px 24px 44px}
+ .customer-hero{padding:27px 25px}
+ .customer-quick-strip{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+ .customer-quick-strip>button{padding:12px 10px;min-height:70px}
+ .customer-quick-strip>button>span:nth-child(2){gap:4px}
+ .customer-overview-grid{grid-template-columns:minmax(0,1.3fr) minmax(230px,.8fr);gap:14px}
+ .customer-side-column{padding:18px}
+}
+@media(min-width:761px){
+ .customer-app .sidebar{width:258px;padding:30px 20px;transform:translateX(0)}
+ .customer-app .main-area{margin-left:258px}
+ .customer-app .topbar{height:86px;padding:0 30px}
+ .customer-app .topbar h1{font-size:19px}
+ .customer-app .top-user span{display:inline}
+ .customer-app .content{padding:34px 30px 60px}
+ .customer-app .customer-welcome h2{font-size:29px}
+ .welcome-date{display:grid}
+ .customer-hero{grid-template-columns:minmax(0,1.15fr) minmax(240px,.85fr);min-height:300px;padding:34px 34px;border-radius:17px;margin-bottom:20px}
+ .hero-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:220px}
+ .hero-glass-card{width:min(100%,290px);height:174px;padding:18px 20px;border:1px solid #ffffff55;border-radius:14px;background:linear-gradient(135deg,#ffffff30,#ffffff0c 75%);box-shadow:0 22px 45px #071e2b45;backdrop-filter:blur(12px);transform:rotate(-5deg);display:flex;flex-direction:column;justify-content:space-between;position:relative}
+ .hero-glass-card:after{content:"";position:absolute;width:190px;height:190px;border:1px solid #ffffff30;border-radius:50%;right:-60px;top:-90px}
+ .glass-card-top,.glass-card-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative;z-index:1}
+ .glass-card-top{font:650 10px Manrope;letter-spacing:.5px}.glass-card-top span:last-child{font-size:8px;letter-spacing:1.7px;color:#e0d0a9}
+ .glass-chip{width:29px;height:23px;border-radius:5px;background:linear-gradient(135deg,#f1dfad,#b99a5c);border:1px solid #fff8;position:relative;z-index:1}
+ .glass-card-number{font:550 13px Manrope;letter-spacing:1.3px;position:relative;z-index:1}
+ .glass-card-bottom{font-size:8px;letter-spacing:1px;color:#e2ebed;text-transform:uppercase}
+ .hero-visual-caption{font-size:9px;color:#b8cbd0;margin-top:22px;letter-spacing:.5px}
+ .hero-balance-value{font-size:clamp(27px,3vw,40px)}
+ .hero-account-line{gap:22px;font-size:10px}
+ .hero-actions{display:flex;gap:10px}
+ .hero-actions button{justify-content:flex-start;padding:11px 15px;font-size:10px}
+ .customer-quick-strip{gap:12px;margin-bottom:30px}
+ .customer-quick-strip>button{padding:16px;min-height:76px}
+ .customer-quick-strip b{font-size:11px}
+ .customer-quick-strip small{font-size:9px}
+ .customer-overview-grid{grid-template-columns:minmax(0,1.65fr) minmax(260px,.85fr);gap:24px}
+ .customer-transactions{padding:2px 18px}
+ .customer-transaction-row{gap:12px;padding:16px 0}
+ .customer-tx-icon{width:36px;height:36px}
+ .customer-tx-description b,.customer-tx-amount b{font-size:11px}
+ .customer-side-column{padding:21px}
+ .customer-detail-line span,.customer-detail-line b{font-size:10px}
+ .customer-auth .auth-art{display:flex}
+ .customer-auth .auth-main{padding:40px}
+ .auth-mobile-signboard{display:none}
+}
+@media(min-width:1100px){
+ .customer-app .topbar{padding:0 48px}
+ .customer-app .content{max-width:1540px;padding:38px 48px 72px}
+ .customer-hero{grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);min-height:320px;padding:40px 44px}
+ .hero-glass-card{width:min(100%,310px);height:184px}
+ .customer-overview-grid{gap:32px}
+}
+@media(min-width:1500px){.customer-app .content{padding-left:64px;padding-right:64px}.customer-hero{min-height:340px;padding:44px 50px}.hero-visual{transform:scale(1.06)}}
+@media(max-width:359px){
+ .customer-app .content{padding-left:11px;padding-right:11px}
+ .customer-hero{padding:19px 15px}
+ .hero-balance-value{font-size:24px}
+ .hero-actions button{font-size:8px}
+ .customer-tx-description b{max-width:125px}
+}
