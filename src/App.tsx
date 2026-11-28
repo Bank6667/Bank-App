@@ -93,7 +93,7 @@ export default function App() {
   const loadAdminData = useCallback(async () => {
     if (!supabase) return;
     const [p, a, c] = await Promise.all([
-      supabase.from('profiles').select('*').eq('role','customer').order('created_at',{ascending:false}),
+      supabase.from('profiles').select('id,role,display_name,email,avatar_url,phone,address,country_name,country_code,demo_pin_set_at,welcome_seen_at,created_at').eq('role','customer').order('created_at',{ascending:false}),
       supabase.from('demo_accounts').select('*'),
       supabase.from('support_conversations').select('*').order('last_message_at',{ascending:false}),
     ]);
@@ -124,7 +124,7 @@ export default function App() {
       const user = data.session?.user;
       setSessionUser(user || null);
       if (user) {
-        const { data: p, error: e } = await supabase!.from('profiles').select('*').eq('id', user.id).maybeSingle();
+        const { data: p, error: e } = await supabase!.from('profiles').select('id,role,display_name,email,avatar_url,phone,address,country_name,country_code,demo_pin_set_at,welcome_seen_at,created_at').eq('id', user.id).maybeSingle();
         if (e) setError(e.message);
         else if (p && entryRole && p.role !== entryRole) { await supabase!.auth.signOut(); setSessionUser(null); setError(`This link is for ${entryRole === 'admin' ? 'administrators' : 'customers'} only. Sign in with the correct account.`); }
         else if (p) { const displayProfile = await addAvatarDisplayUrl(p as Profile); setProfile(displayProfile); await refresh(p as Profile); if (!p.welcome_seen_at && p.role === 'customer') setShowWelcome(true); }
@@ -143,7 +143,7 @@ export default function App() {
     const channel = supabase.channel('simulator-live-'+profile.id)
       .on('postgres_changes',{event:'*',schema:'public',table:'notifications',filter:'user_id=eq.'+profile.id},()=>loadCustomerData(profile.id))
       .on('postgres_changes',{event:'*',schema:'public',table:'demo_accounts',filter:'user_id=eq.'+profile.id},()=>profile.role==='customer' && loadCustomerData(profile.id))
-      .on('postgres_changes',{event:'*',schema:'public',table:'profiles',filter:'id=eq.'+profile.id},async()=>{if(profile.role==='customer'){const {data}=await supabase!.from('profiles').select('*').eq('id',profile.id).maybeSingle();if(data)setProfile(await addAvatarDisplayUrl(data as Profile));}})
+      .on('postgres_changes',{event:'*',schema:'public',table:'profiles',filter:'id=eq.'+profile.id},async()=>{if(profile.role==='customer'){const {data}=await supabase!.from('profiles').select('id,role,display_name,email,avatar_url,phone,address,country_name,country_code,demo_pin_set_at,welcome_seen_at,created_at').eq('id',profile.id).maybeSingle();if(data)setProfile(await addAvatarDisplayUrl(data as Profile));}})
       .on('postgres_changes',{event:'*',schema:'public',table:'demo_transactions'},()=>profile.role==='customer' ? loadCustomerData(profile.id) : loadAdminData())
       .on('postgres_changes',{event:'*',schema:'public',table:'support_messages'},()=>activeConversation && loadMessages(activeConversation))
       
@@ -157,7 +157,7 @@ export default function App() {
       if (!supabase) throw new Error('Supabase is not configured yet.');
       const { data, error: e2 } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
       if (e2) throw e2;
-      const { data: p, error: pErr } = await supabase.from('profiles').select('*').eq('id', data.user.id).single();
+      const { data: p, error: pErr } = await supabase.from('profiles').select('id,role,display_name,email,avatar_url,phone,address,country_name,country_code,demo_pin_set_at,welcome_seen_at,created_at').eq('id', data.user.id).single();
       if (pErr) throw pErr;
       if (entryRole && p.role !== entryRole) { await supabase.auth.signOut(); throw new Error(`This link is for ${entryRole === 'admin' ? 'administrators' : 'customers'} only. Sign in with the correct account.`); }
       const displayProfile = await addAvatarDisplayUrl(p as Profile); setProfile(displayProfile); await refresh(p as Profile); setTab('overview');
