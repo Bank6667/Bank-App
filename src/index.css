@@ -120,3 +120,9 @@
 .customer-auth .primary{background:#163b55;border-color:#163b55;border-radius:7px;min-height:44px;font-size:11px;letter-spacing:.2px}
 .customer-auth .login-help{margin-top:19px!important}
 @media(max-width:760px){.customer-auth .auth-art{display:none}}
+
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-logo-image{width:39px;height:39px;object-fit:contain;flex:none;border-radius:7px;background:#fff;padding:3px}
+.customer-app .brand-logo-image{width:40px;height:40px;background:#fff;border-radius:8px;padding:4px}
+.balance-bank-logo{width:58px;height:58px;object-fit:contain;background:#fff;border-radius:10px;padding:6px;margin-bottom:15px}
+.admin-image-preview.logo-preview{width:116px;height:76px;object-fit:contain;background:#f8f9fa;border:1px solid #e4e9ed;border-radius:8px;padding:8px}
